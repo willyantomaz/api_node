@@ -1,12 +1,13 @@
 import bookModel from './book.schema'
+import { Book } from './book.interface'
 
 export class BookService {
-    async create(book: any) {
+    async create(book: Book) {
         const createdBook = bookModel.create(book)
         return createdBook
     }
 
-    async findById(id: any) {
+    async findById(id: String) {
         const findedBook = await bookModel.findById(id)
         return findedBook
     }
@@ -16,13 +17,13 @@ export class BookService {
         return findedAllBook
     }
 
-    async update(id: any, book: any){
-        const updateBook = await bookModel.findByIdAndUpdate(id, book)
+    async update(id: String, book: Book){
+        const updateBook = await bookModel.findByIdAndUpdate(id, book, {new: true}) // new: true para que retorne o livro atualizado 
         return updateBook
     
     }
 
-    async delete(id: any){
+    async delete(id: String){
         const deleteBook = await bookModel.findByIdAndDelete(id)
         return deleteBook
     }
